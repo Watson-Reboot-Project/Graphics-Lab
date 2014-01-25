@@ -3,6 +3,8 @@
 * All variable arrays are declared and
 * the variable window is populated with
 * the declared variables
+*
+* relies on `canvas.js`
 */
 
 //Declare all variables

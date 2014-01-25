@@ -2,13 +2,19 @@
  *
  *  Contains code for creating new shape objects
  *
+ * relies on `canvas.js`
+ * relied on by ... `canvas.js`?
  */
 
 //Declare all variables
+// local
 var codeSep = 0; //Used for naming div elements that separate code lines
+// local
 var codeText = [];
 
 //Point object
+// TODO: de-global-ize
+// canvas.js ... maybe?
 function point(startX, startY) {
     this.startX = startX;
     this.startY = startY;

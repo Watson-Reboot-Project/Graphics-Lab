@@ -6,8 +6,8 @@ var selRow = 0; // the current selected row
 var blank = '&nbsp;&nbsp;&nbsp;&nbsp;'; // blank template for unselected row
 var arrow = '&#8594;'; // arrow template for selected row
 var indent = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'; // indention used for inside brackets
-var innerTableTemplate = '<table class=\'innerTable' + figNum + '\'' + blank + '\''; // template used for a newly added row in the codeTable
-var innerTableArrowTemplate =  + figNum + '\'' + '\'' + arrow +  '\''; // template used for a newly selected row
+var innerTableTemplate = '<table class=\'innerTable' + figNum + '\'' + '><tr><td class=\'codeTd\'>' + blank + '</td><td class=\'codeTd\'>&#8226;&nbsp;&nbsp;</td></tr></table>'; // template used for a newly added row in the codeTable
+var innerTableArrowTemplate = '<table class=\'innerTable' + figNum + '\'' + '><tr><td class=\'codeTd\'>' + arrow +  '</td><td class=\'codeTd\'>&nbsp;&nbsp;</td></tr></table>'; // template used for a newly selected row
 
 init();
 

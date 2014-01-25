@@ -43,9 +43,7 @@ function toggleEvents() {
                 highlightParenthesis('(', ')', rowNum, colNum);
             } else if (cellVal.indexOf(')') >= 0) {
                 highlightParenthesisBackwards('(', ')', rowNum, colNum);
-            } else {
-                highlightCell(rowNum, colNum);
-            }
+            } else { highlightCell(rowNum, colNum); }
         }
     });
 
@@ -125,22 +123,22 @@ function highlightLoop(rowInd, colInd) {
     var bracket = 1;                        // bracket found initialized to 1 so the while loops executes
     var numCells;                                // number of cells in the current row
     var firstBrack = false;                // first bracket found flag; since bracket is initialized to one, the first bracket doesn't count
+    var innerTable;
 
     for (var i = rowInd; i < codeTable.rows.length; i++) {                                                                // iterate throughout rows starting at the specified index
-        var innerTable = codeTable.rows[i].cells[0].children[0];                                                // grab the inner table of this row
+        innerTable = codeTable.rows[i].cells[0].children[0];                                                // grab the inner table of this row
         numCells = innerTable.rows[0].cells.length;                                                                        // grab the number of cells in this row
         for (var j = 0; j < numCells; j++) {                                                                                        // iterate throughout these cells
             if (innerTable.rows[0].cells[j].innerText.indexOf('{') >= 0) {                                // if we found a '{'
-                if (!firstBrack) { firstBrack = true; }                                                                                // if this is the first bracket, skip it
-                else { bracket++; }                                                                                                                       // otherwise, count it 
-            }
-            else if (innerTable.rows[0].cells[j].innerText.indexOf('}') >= 0) {                        // if we found a '}'
+                if (!firstBrack) { firstBrack = true; }                                                                              // if this is the first bracket, skip it
+                else { bracket++; }                                                                                                                      // otherwise, count it
+            } else if (innerTable.rows[0].cells[j].innerText.indexOf('}') >= 0) {                        // if we found a '}'
                 bracket--;                                                                                                                                // subtract from bracket
             }
 
             innerTable.rows[0].cells[j].style.color = '#FF0000';                                                // color the current cell red as we go
         }
-        if (bracket === 0) { break; }                                                                                                               // if we found matching brackets, brackets will be 0, break
+        if (bracket === 0) { break; }                                                                                                              // if we found matching brackets, brackets will be 0, break
     }
 }
 
@@ -150,13 +148,14 @@ function highlightParenthesis(openBracket, closeBracket, rowInd, colInd) {
     var firstBrack = false;
     var firstLoop = true;
     var innerTable;
+    var i, j;
 
     while (bracket !== 0) {
-        for (var i = 0; i < codeTable.rows.length; i++) {
+        for (i = 0; i < codeTable.rows.length; i++) {
             if (firstLoop === true) { i = rowInd; }
             innerTable = codeTable.rows[i].cells[0].children[0];
             numCells = innerTable.rows[0].cells.length;
-            for (var j = 0; j < numCells; j++) {
+            for (j = 0; j < numCells; j++) {
                 if (firstLoop === true) { j = colInd; firstLoop = false; }
 
                 if (innerTable.rows[0].cells[j].innerText.indexOf(openBracket) >= 0) {
@@ -275,7 +274,7 @@ function addRow(table, values, startInd) {
 
 // selectRow() selects a row with the specified rowNum
 function selectRow(rowNum) {
-    var innerText;
+    var innerTable;
     if (selRow != -1) {                                                                                                                // if there is a selected row
         innerTable = codeTable.rows[selRow].cells[0].children[0]; // grab the innerTable for the currently selected row
         innerTable.rows[0].cells[0].innerHTML = blank; // make its arrow go away (it is no longer selected)
@@ -291,17 +290,17 @@ function selectRow(rowNum) {
 // is reached. The number of opened brackets without a matching close parenthesis is how many tabs this row
 // will need
 function findIndentation(row) {
+    var i, j;
+
     var bracket = 0;        // number of brackets opened
-    var i;
     for (i = 0; i < codeTable.rows.length; i++) {                                                                // iterate throughout the code table
-        if (i == row) { break; }                                                                                                                // when the iteration equals the row, stop
+        if (i == row) { break; }                                                                                                              // when the iteration equals the row, stop
         var innerTable = codeTable.rows[i].cells[0].children[0];                                        // grab the inner table for this row in the code table
         var numCells = innerTable.rows[0].cells.length;                                                                // grab the number of cells in this inner table
-        for (var j = 0; j < numCells; j++) {                                                                                // iterate throughout the cells
+        for (j = 0; j < numCells; j++) {                                                                                // iterate throughout the cells
             if (innerTable.rows[0].cells[j].innerText.indexOf('{') >= 0) {                        // if an open bracket, add one to bracket
                 bracket++;
-            }
-            else if (innerTable.rows[0].cells[j].innerText.indexOf('}') >= 0) {                // if a close bracket, subtract one from bracket
+            } else if (innerTable.rows[0].cells[j].innerText.indexOf('}') >= 0) {                // if a close bracket, subtract one from bracket
                 bracket--;
             }
         }
@@ -369,12 +368,3 @@ function loop() {
     addNewRow(selRow, ['loop']);
     addNewRow(selRow, ['endloop']);
 }
-
-
-
-
-
-
-
-
-

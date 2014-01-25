@@ -10,7 +10,7 @@ var paintbrush = 0; //Keeps track of which function was called last. (prevents m
 var color = 'red';
 
 //Event listener for cursor position on canvas
-$('j' + canvas.id).mousemove(function(evt) {
+$('#' + canvas.id).mousemove(function(evt) {
     var cursorPos = getCursorPos(canvas, evt);
     var message = Math.floor(cursorPos.x) + ' x ' + Math.floor(cursorPos.y);
     if (isNaN(cursorPos.x) || cursorPos.x > 300 || cursorPos.x < 0 || cursorPos.y > 300 || cursorPos.y < 0) {
@@ -33,8 +33,8 @@ function clear() {
 
 //Draws all saved objects onto the canvas
 function draw() {
-    for (var i = 0; i < toDraw.length; i++) {
-        var ctx;
+    var ctx, i;
+    for (i = 0; i < toDraw.length; i++) {
         if (toDraw[i].type == 'point') {
             //This is a point
             ctx = canvas.getContext('2d');
@@ -55,7 +55,8 @@ function draw() {
             ctx.arc(toDraw[i].startX, toDraw[i].startY, toDraw[i].diameter, 0, 2*Math.PI);
             ctx.strokeStyle = color;
             ctx.stroke();
-        } else if (toDraw[i].type == 'polygon') {
+        }
+        else if (toDraw[i].type == 'polygon') {
             //This is a polygon
             for (var n = 0; n < toDraw[i].angles.length; n++) {
                 ctx = canvas.getContext('2d');
@@ -79,6 +80,7 @@ function findDistance(startX, startY, endX, endY) {
 function writeMessage(canvas, message) {
     clear();
     draw();
+
     var ctx = canvas.getContext('2d');
     ctx.textAlign = 'right';
     ctx.font = '8pt Calibri';
@@ -315,7 +317,8 @@ function drawPolygon() {
                     this.removeEventListener('mousemove',arguments.callee,false);
                 }
             }, false);
-        } else {
+        }
+        else {
             endX = evt.clientX - rect.left;
             endY = evt.clientY - rect.top;
             if (click > 2) {

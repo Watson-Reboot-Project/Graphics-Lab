@@ -156,6 +156,12 @@ loopButton.onclick = function() {loop();};
 loopButton.innerHTML = "Loop";
 loopButton.style.cssFloat = "right";
 
+// -------------------
+// including numberpad
+// -------------------
+
+
+
 //Define window label
 var drawLabel = "Drawing Window";
 var varLabel = "Variable Declarations";
@@ -190,13 +196,6 @@ var container = document.getElementById("container");
 container.appendChild(drawDiv);
 container.appendChild(variableWindowDiv);
 container.appendChild(programWindowDiv);
-
-
-
-
-
-
-
 
 
 

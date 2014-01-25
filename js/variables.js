@@ -55,6 +55,3 @@ function newDistance() {
 	distanceVariables[distanceVariables.length] = 'd' + (distanceVariables.length+1);
 	printVars();
 }
-
-
-

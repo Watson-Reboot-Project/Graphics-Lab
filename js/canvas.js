@@ -106,8 +106,8 @@ function drawPoint() {
     var rect = canvas.getBoundingClientRect();
     pointVariables[pointVariables.length] = 'p' + (pointVariables.length+1);
     printVars();
-        
-        
+
+
     canvas.addEventListener('click', function(evt) {
         if (curr < paintbrush) { //Checks to see if another button has been pushed
                 this.removeEventListener('click',arguments.callee,false);
@@ -118,12 +118,12 @@ function drawPoint() {
         startX = evt.clientX - rect.left;
         startY = evt.clientY - rect.top;
         toDraw[toDraw.length] = new point(startX, startY);
-        
-        addNewRow(selRow, [pointVariables[pointVariables.length-1], "&nbsp;=&nbsp;", 
+
+        addNewRow(selRow, [pointVariables[pointVariables.length-1], "&nbsp;=&nbsp;",
             "(", startX,",", 300-startY, ")"]);
         addNewRow(selRow, ["draw", "(", pointVariables[pointVariables.length-1], ")"])
     }
-    
+
     //remove listener after the line has been drawn
     if (click > 0) {
             this.removeEventListener('click',arguments.callee,false);
@@ -143,7 +143,7 @@ function drawLine() {
     var rect = canvas.getBoundingClientRect();
     lineVariables[lineVariables.length] = 'l' + (lineVariables.length+1);
     printVars();
-    
+
     canvas.addEventListener('click', function(evt) {
         if (curr < paintbrush) { //Checks to see if another button has been pushed
                 this.removeEventListener('click',arguments.callee,false);
@@ -153,7 +153,7 @@ function drawLine() {
         if (click == 1) {
             startX = evt.clientX - rect.left;
             startY = evt.clientY - rect.top;
-            
+
             //visualize what the line will look like as the user moves the cursor around
             canvas.addEventListener('mousemove', function(evt) {
                 if (curr < paintbrush) { //Checks to see if another button has been pushed
@@ -174,12 +174,12 @@ function drawLine() {
             endX = evt.clientX - rect.left;
             endY = evt.clientY - rect.top;
             toDraw[toDraw.length] = new line(startX, startY, endX, endY, "line");
-            
-            addNewRow(selRow, [lineVariables[lineVariables.length-1], "&nbsp;=&nbsp;", 
+
+            addNewRow(selRow, [lineVariables[lineVariables.length-1], "&nbsp;=&nbsp;",
                 "(", "(", startX, ",", 300-startY, ")", "(", endX, ",", 300-endY, ")", ")"]);
             addNewRow(selRow, ["draw", "(", lineVariables[lineVariables.length-1], ")"]);
         }
-        
+
         //remove listener after the line has been drawn
         if (click > 1) {
             this.removeEventListener('click',arguments.callee,false);
@@ -199,7 +199,7 @@ function drawCircle() {
     var rect = canvas.getBoundingClientRect();
     circleVariables[circleVariables.length] = 'c' + (circleVariables.length+1);
     printVars();
-    
+
     canvas.addEventListener('click', function(evt) {
         if (curr < paintbrush) { //Checks to see if another button has been pushed
             this.removeEventListener('click',arguments.callee,false);
@@ -209,7 +209,7 @@ function drawCircle() {
         if (click == 1) {
             startX = evt.clientX - rect.left;
             startY = evt.clientY - rect.top;
-            
+
             //visualize what the circle will look like as the user moves the cursor around
             canvas.addEventListener('mousemove', function(evt) {
                     if (curr < paintbrush) { //Checks to see if another button has been pushed
@@ -229,12 +229,12 @@ function drawCircle() {
             endX = evt.clientX - rect.left;
             endY = evt.clientY - rect.top;
             toDraw[toDraw.length] = new circle(startX, startY, Math.round(findDistance(startX, startY, endX, endY)));
-            
-            addNewRow(selRow, [circleVariables[circleVariables.length-1], "&nbsp;=&nbsp;", "(", "(",  
+
+            addNewRow(selRow, [circleVariables[circleVariables.length-1], "&nbsp;=&nbsp;", "(", "(",
                 startX, ",", 300-startY, ")", Math.round(findDistance(startX, startY, endX, endY)), ")"]);
             addNewRow(selRow, ["draw", "(", circleVariables[circleVariables.length-1], ")"]);
         }
-        
+
         //remove listener after the circle has been drawn
         if (click > 1) {
             this.removeEventListener('click',arguments.callee,false);
@@ -244,7 +244,7 @@ function drawCircle() {
 
 //Allows user to draw a polygon on canvas. Saves polygon in toDraw array
 function drawPolygon() {
-    paintbrush++; 
+    paintbrush++;
     var curr = paintbrush;
     var click = 0;
     var startX;
@@ -255,7 +255,7 @@ function drawPolygon() {
     var rect = canvas.getBoundingClientRect();
     polygonVariables[polygonVariables.length] = 'g' + (polygonVariables.length+1);
     printVars();
-    
+
     //defines a point (or angle) on the polygon
     function point(startX, startY, endX, endY) {
         this.startX = startX;
@@ -263,7 +263,7 @@ function drawPolygon() {
         this.endX = endX;
         this.endY = endY;
     }
-    
+
     canvas.addEventListener('click', function(evt) { //Listens for click on canvas
         if (curr < paintbrush) { //Checks to see if another button has been pushed
             this.removeEventListener('click',arguments.callee,false);
@@ -279,19 +279,19 @@ function drawPolygon() {
                 startX = evt.clientX - rect.left;
                 startY = evt.clientY - rect.top;
             }
-            
+
             //visualize what the line will look like as the user moves the cursor around
             canvas.addEventListener('mousemove', function(evt) {
                 if (curr < paintbrush) { //Checks to see if another button has been pushed
                     this.removeEventListener('mousemove',arguments.callee,false);
-                    
+
                     var x = 0;
                     for (var i = 0; i < toDraw.length; i++) {
                         if (toDraw[i].type == 'temp')
                             x++;
                     }
                     toDraw = toDraw.slice(0, toDraw.length-x);
-                    
+
                     return;
                 }
                 var ctx = canvas.getContext('2d');
@@ -320,12 +320,12 @@ function drawPolygon() {
                     this.removeEventListener('click',arguments.callee,false);
                     toDraw[toDraw.length] = new line(startX, startY, coor[0].startX, coor[0].startY, "temp"); //Set this line to temporary because it's merely a preview
                     coor[coor.length] = new point(startX, startY, coor[0].startX, coor[0].startY);
-                    
+
                     //Erase all line elements in toDraw that were used for polygon. Save polygon.
                     toDraw = toDraw.slice(0, toDraw.length-coor.length);
                     toDraw[toDraw.length] = new polygon(coor);
-                    
-                    addNewRow(selRow, [polygonVariables[polygonVariables.length-1], "&nbsp;=&nbsp;", 
+
+                    addNewRow(selRow, [polygonVariables[polygonVariables.length-1], "&nbsp;=&nbsp;",
                         "(", "(", coor[0].startX, ",", 300-coor[0].startY, ")", ","]);
                     for(var i = 1; i < coor.length; i++) {
                         if (i == coor.length-1)

@@ -55,8 +55,7 @@ function draw() {
             ctx.arc(toDraw[i].startX, toDraw[i].startY, toDraw[i].diameter, 0, 2*Math.PI);
             ctx.strokeStyle = color;
             ctx.stroke();
-        }
-        else if (toDraw[i].type == 'polygon') {
+        } else if (toDraw[i].type == 'polygon') {
             //This is a polygon
             for (var n = 0; n < toDraw[i].angles.length; n++) {
                 ctx = canvas.getContext('2d');
@@ -108,12 +107,12 @@ function drawPoint() {
     pointVariables[pointVariables.length] = 'p' + (pointVariables.length+1);
     printVars();
 
-
     canvas.addEventListener('click', function(evt) {
         if (curr < paintbrush) { //Checks to see if another button has been pushed
             this.removeEventListener('click',arguments.callee,false);
             return;
         }
+
         click++;
         if (click == 1) {
             startX = evt.clientX - rect.left;
@@ -129,6 +128,7 @@ function drawPoint() {
         if (click > 0) {
             this.removeEventListener('click',arguments.callee,false);
         }
+
     }, false);
 }
 
@@ -150,6 +150,7 @@ function drawLine() {
             this.removeEventListener('click',arguments.callee,false);
             return;
         }
+
         click++;
         if (click == 1) {
             startX = evt.clientX - rect.left;
@@ -157,10 +158,13 @@ function drawLine() {
 
             //visualize what the line will look like as the user moves the cursor around
             canvas.addEventListener('mousemove', function(evt) {
-                if (curr < paintbrush) { //Checks to see if another button has been pushed
+
+                // Check to see if another button has been pushed
+                if (curr < paintbrush) {
                     this.removeEventListener('mousemove',arguments.callee,false);
                     return;
                 }
+
                 var ctx = canvas.getContext('2d');
                 ctx.beginPath();
                 ctx.moveTo(startX, startY);
@@ -170,9 +174,9 @@ function drawLine() {
                 if (click > 1) {
                     this.removeEventListener('mousemove',arguments.callee,false);
                 }
+
             }, false);
-        }
-        else if (click == 2) {
+        } else if (click == 2) {
             endX = evt.clientX - rect.left;
             endY = evt.clientY - rect.top;
             toDraw[toDraw.length] = new line(startX, startY, endX, endY, 'line');
@@ -186,6 +190,7 @@ function drawLine() {
         if (click > 1) {
             this.removeEventListener('click',arguments.callee,false);
         }
+
     }, false);
 }
 
@@ -227,8 +232,7 @@ function drawCircle() {
                     this.removeEventListener('mousemove',arguments.callee,false);
                 }
             }, false);
-        }
-        else if (click == 2) {
+        } else if (click == 2) {
             endX = evt.clientX - rect.left;
             endY = evt.clientY - rect.top;
             toDraw[toDraw.length] = new circle(startX, startY, Math.round(findDistance(startX, startY, endX, endY)));
@@ -277,8 +281,7 @@ function drawPolygon() {
             if (click > 1) {
                 startX = endX;
                 startY = endY;
-            }
-            else {
+            } else {
                 startX = evt.clientX - rect.left;
                 startY = evt.clientY - rect.top;
             }
@@ -317,8 +320,7 @@ function drawPolygon() {
                     this.removeEventListener('mousemove',arguments.callee,false);
                 }
             }, false);
-        }
-        else {
+        } else {
             endX = evt.clientX - rect.left;
             endY = evt.clientY - rect.top;
             if (click > 2) {
@@ -341,14 +343,12 @@ function drawPolygon() {
                         }
                     }
                     addNewRow(selRow, ['draw', '(', polygonVariables[polygonVariables.length-1], ')']);
-                }
-                else {
+                } else {
                     toDraw[toDraw.length] = new line(startX, startY, endX, endY, 'temp'); //Set this line to temporary because it's merely a preview
                     coor[coor.length] = new point(startX, startY, endX, endY);
                     canvas.click();
                 }
-            }
-            else {
+            } else {
                 toDraw[toDraw.length] = new line(startX, startY, endX, endY, 'temp'); //Set this line to temporary because it's merely a preview
                 coor[coor.length] = new point(startX, startY, endX, endY);
                 canvas.click();

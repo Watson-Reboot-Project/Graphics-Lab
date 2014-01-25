@@ -5,7 +5,7 @@
 var step = 0;
 //Allows users to run the program slowly
 function run() {
-	console.log("run");
+    console.log('run');
 }
 
 //Allows users to walk through the program code one step at a time

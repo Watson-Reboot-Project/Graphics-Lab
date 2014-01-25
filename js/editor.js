@@ -66,24 +66,22 @@ function toggleEvents() {
         //This doesn't work right now
         if (cellVal.indexOf('•') >= 0) {
             alert('delete this row');
-        }
+
         //User clicked on variable number. Generate keypad popup
-        else if (!isNaN(Number(cellVal))) {
+        } else if (!isNaN(Number(cellVal))) {
             alert('Generate keypad with 3 digit limit');
-        }
+
         //User clicked on something within draw(). Generate list of drawable items
-        else if (rowToString(rowNum).indexOf('draw') >= 0 && cellVal.indexOf('draw') == -1) {
+        } else if (rowToString(rowNum).indexOf('draw') >= 0 && cellVal.indexOf('draw') == -1) {
             alert('Draw: Bring up list of variables that appear on left side of an assignment');
-        }
-        else if (rowToString(rowNum).indexOf('erase') >= 0) {
+        } else if (rowToString(rowNum).indexOf('erase') >= 0) {
             alert('Erase: Bring up list of variables that appear on left side of an assignment');
-        }
-        else if (rowToString(rowNum).indexOf('color') >= 0) {
+        } else if (rowToString(rowNum).indexOf('color') >= 0) {
             alert('Color: bring up list of colors');
-        }
+
         //User clicked on the loop counter. (It could already be assigned in which case it wouldn't be labelled 'COUNTER')
         //Make sure user isn't clicking 'repeat' or 'times'
-        else if (rowToString(rowNum).indexOf('repeat') >= 0 && cellVal.indexOf('repeat') == -1 && cellVal.indexOf('times') == -1) {
+        } else if (rowToString(rowNum).indexOf('repeat') >= 0 && cellVal.indexOf('repeat') == -1 && cellVal.indexOf('times') == -1) {
             alert('Generate keypad with 2 digit limit');
         }
     });
@@ -191,8 +189,7 @@ function highlightParenthesisBackwards(openBracket, closeBracket, rowInd, colInd
 
                 if (innerTable.rows[0].cells[j].innerText.indexOf(openBracket) >= 0) {
                     bracket--;
-                }
-                else if (innerTable.rows[0].cells[j].innerText.indexOf(closeBracket) >= 0) {
+                } else if (innerTable.rows[0].cells[j].innerText.indexOf(closeBracket) >= 0) {
                     if (!firstBrack) { firstBrack = true; }
                     else { bracket++; }
                 }
@@ -240,8 +237,7 @@ function loop(params) {
         if (i === 0) {
             addRow(innerTable, [ indentStr + '<b>for</b>&nbsp;', '(', params[0] + '&nbsp;', '=&nbsp;', params[1], ';&nbsp;', params[2] + '&nbsp;', params[3] + '&nbsp;', params[4], ';&nbsp;', params[5], params[6], ')' ], 2);
             addRowStyle(innerTable, [ 'blue', 'black', 'black', 'black', 'black', 'black', 'black', 'black', 'black', 'black', 'black', 'black', 'black' ], 2);
-        }
-        else if (i == 1) { addRow(innerTable, [ indentStr + '{' ], 2); }
+        } else if (i == 1) { addRow(innerTable, [ indentStr + '{' ], 2); }
         else if (i == 2) { addRow(innerTable, [ indentStr + '}' ], 2); }
     }
 

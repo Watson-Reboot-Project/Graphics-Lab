@@ -4,17 +4,25 @@
 * the variable window is populated with
 * the declared variables
 *
-* relies on `canvas.js`
+* relied on by `canvas.js`, `addElements.js`
 */
 
 //Declare all variables
+// TODO: canvas.js
 var pointVariables = [];
+// TODO: canvas.js
 var lineVariables = [];
+// TODO: canvas.js
 var circleVariables = [];
+// TODO: canvas.js
 var polygonVariables = [];
+// TODO: canvas.js
 var distanceVariables = [];
 
+var paintbrush = 0; //Keeps track of which function was called last. (prevents multiple shapes from being drawn at once)
+
 //Print all declared variables into the variables window
+// canvas.js
 function printVars() {
     var d = '';
     var p = '';
@@ -60,6 +68,7 @@ function printVars() {
 }
 
 //New Distance variable
+// TODO: addElements.js
 function newDistance() {
     paintbrush++;
     distanceVariables[distanceVariables.length] = 'd' + (distanceVariables.length+1);

@@ -2,8 +2,7 @@
  *
  *  Contains code for creating new shape objects
  *
- * relies on `canvas.js`
- * relied on by ... `canvas.js`?
+ * relied on by `canvas.js`?
  */
 
 //Declare all variables
@@ -13,8 +12,7 @@ var codeSep = 0; //Used for naming div elements that separate code lines
 var codeText = [];
 
 //Point object
-// TODO: de-global-ize
-// canvas.js ... maybe?
+// TODO: canvas.js
 function point(startX, startY) {
     this.startX = startX;
     this.startY = startY;
@@ -25,6 +23,7 @@ function point(startX, startY) {
     this.assigned = true; //Boolean to control whether variable has been assigned or not
 }
 //Line object
+// TODO: canvas.js
 function line(startX, startY, endX, endY, type) {
     this.startX = startX;
     this.startY = startY;
@@ -37,6 +36,7 @@ function line(startX, startY, endX, endY, type) {
     this.assigned = true; //Boolean to control whether variable has been assigned or not
 }
 //Circle object
+// TODO: canvas.js
 function circle(startX, startY, diameter) {
     this.startX = startX;
     this.startY = startY;
@@ -48,6 +48,7 @@ function circle(startX, startY, diameter) {
     this.assigned = true;
 }
 //Polygon object
+// TODO: canvas.js
 function polygon(angles) {
     this.angles = angles;
     this.type = 'polygon';

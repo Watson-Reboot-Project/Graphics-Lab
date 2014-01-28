@@ -1,0 +1,9 @@
+ok. so we have a collection of source files with intertwining global variable
+dependencies. i'm in the process of trying to convert them to angular modules.
+i've gone through and found what variables are dependent between files, marked
+them as such, and made a graph of what files depend on what. I am in the
+process of finding a method by which to dis-connect them. I'd like to do a
+complete overhaul, but I don't have that kind of time.
+
+I've looked at angular module services, factories, and providers. still trying
+to get in my head how the files interact.

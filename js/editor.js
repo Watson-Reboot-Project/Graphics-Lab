@@ -1,10 +1,12 @@
 /*
  * This code is for the Watson Graphics Lab editor.
  *
- * relied on by `canvas.js`
+ * relied on by `canvas.js` `run_walk.js`, `addElements.js`
  */
 
-define(['addElements'], function() {
+(function() {
+    var app = angular.module('Graphics');
+
     // TODO: de-global-ize
     // canvas.js
     var selRow = 0; // the current selected row

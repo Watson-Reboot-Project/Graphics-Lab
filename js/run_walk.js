@@ -1,7 +1,6 @@
 /*
  * Controls the Run and Walk features of the Watson Graphcis Lab
  *
- * relies on `editor.js`
  * relied on by `addElements.js`
  */
 
